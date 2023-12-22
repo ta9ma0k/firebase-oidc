@@ -23,8 +23,6 @@ jobs:
         run: npm install -C functions
       - uses: google-github-actions/auth@v1
         with:
-          token_format: access_token
-          access_token_lifetime: 1200s
           create_credentials_file: true
           service_account: github-actions@ankoromochi-6482c.iam.gserviceaccount.com
           workload_identity_provider: projects/1086517124040/locations/global/workloadIdentityPools/github-actions-pool1/providers/github-actions-provider
