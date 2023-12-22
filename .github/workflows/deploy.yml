@@ -25,7 +25,5 @@ jobs:
         with:
           service_account: github-actions@ankoromochi-6482c.iam.gserviceaccount.com
           workload_identity_provider: projects/1086517124040/locations/global/workloadIdentityPools/github-actions-pool1/providers/github-actions-provider
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only functions
+      - run: firebase deploy --only hosting
+
