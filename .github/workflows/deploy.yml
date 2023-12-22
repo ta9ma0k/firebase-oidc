@@ -31,8 +31,8 @@ jobs:
       - id: 'gcloud'
         name: 'gcloud'
         run: |-
-         gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-        gcloud services list
+          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+          gcloud services list
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
