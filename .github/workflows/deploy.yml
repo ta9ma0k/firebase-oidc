@@ -21,7 +21,9 @@ jobs:
           cache-dependency-path: functions/package-lock.json
       - name: Install dependencies
         run: npm install -C functions
-      - uses: google-github-actions/auth@v1
+      - name: OIDC
+        id: auth
+        uses: google-github-actions/auth@v1
         with:
           create_credentials_file: true
           service_account: github-actions@ankoromochi-6482c.iam.gserviceaccount.com
