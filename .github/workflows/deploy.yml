@@ -28,14 +28,9 @@ jobs:
           create_credentials_file: true
           service_account: github-actions@ankoromochi-6482c.iam.gserviceaccount.com
           workload_identity_provider: projects/1086517124040/locations/global/workloadIdentityPools/github-actions-pool1/providers/github-actions-provider
-      - id: 'gcloud'
-        name: 'gcloud'
-        run: |-
-          gcloud auth login
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only functions
-        env:
-           GCP_SA_KEY: ${{ steps.auth.output.credentials_file_path }}
 
+      - name: Install Firebase CLI
+        run: yarn global add firebase-tools
+
+      - name: Deploy to Firebase functions 
+        run: firebase deploy --only functions 
