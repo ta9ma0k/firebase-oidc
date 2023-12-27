@@ -33,4 +33,4 @@ jobs:
       - name: Deploy to Firebase
         uses: ta9ma0k/firebase-action@develop
         with:
-          args: deploy
+          args: projects:list
