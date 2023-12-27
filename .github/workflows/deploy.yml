@@ -31,5 +31,5 @@ jobs:
           workload_identity_provider: projects/1086517124040/locations/global/workloadIdentityPools/github-actions-pool1/providers/github-actions-provider
 
       - name: 'gcloud auth'
-        run: gcloud auth activate-service-account
+        run: gcloud auth application-default login
 
