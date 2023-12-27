@@ -31,7 +31,6 @@ jobs:
           workload_identity_provider: projects/1086517124040/locations/global/workloadIdentityPools/github-actions-pool1/providers/github-actions-provider
 
       - name: Deploy to Firebase
-        uses: ta9ma0k/firebase-action
+        uses: ta9ma0k/firebase-action@v0.0.1
         with:
           args: deploy --only functions
-
