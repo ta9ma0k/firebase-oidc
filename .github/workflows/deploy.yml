@@ -34,3 +34,4 @@ jobs:
         uses: ta9ma0k/firebase-action
         with:
           args: deploy --only functions
+
