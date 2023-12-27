@@ -22,9 +22,6 @@ jobs:
       - name: Install dependencies
         run: npm install -C functions
 
-      - name: Install firebase tools
-        run: npm install -g firebase-tools
-
       - id: 'auth'
         name: 'Authenticate to GCP'
         uses: google-github-actions/auth@v1
@@ -33,5 +30,6 @@ jobs:
           service_account: github-actions@ankoromochi-6482c.iam.gserviceaccount.com
           workload_identity_provider: projects/1086517124040/locations/global/workloadIdentityPools/github-actions-pool1/providers/github-actions-provider
 
-      - name: Deploy
-        run: firebase deploy --only functions
+      - uses: ta9ma0k/firebase-action@master
+        with:
+          args: deploy --only functions
