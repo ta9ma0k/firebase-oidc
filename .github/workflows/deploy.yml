@@ -33,5 +33,3 @@ jobs:
       - uses: ta9ma0k/firebase-action@master
         with:
           args: deploy --only functions
-        env:
-          PROJECT_ID: ankoromochi-6482c
