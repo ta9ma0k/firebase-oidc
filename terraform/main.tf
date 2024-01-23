@@ -9,10 +9,9 @@ terraform {
 
 resource "google_iam_workload_identity_pool" "main" {
   project = var.project_id
-  workload_identity_pool_id = var.pool_id 
-  description = "OpenID Connect"
+  workload_identity_pool_id = "github-actions-pool1" 
+  description = "For OpenID Connect"
   display_name = var.pool_id
-  timeouts {}
 }
 
 resource "google_iam_workload_identity_pool_provider" "github_provider" {
@@ -26,18 +25,10 @@ resource "google_iam_workload_identity_pool_provider" "github_provider" {
     allowed_audiences = []
   }
   attribute_mapping = {
-    "google.subject": "assertion.sub",
-    "attribute,actor": "assertion.actor",
-    "attribute.repository": "assertion.repository"
-  } 
-}
-
-resource "google_service_account" "github_actions_sa" {
-  project = var.project_id
-  account_id = "github-actions"
-  description = "Access from github actions"
-  disabled = false
-  timeouts {}
+    "google.subject"       = "assertion.sub",
+    "attribute.actor"      = "assertion.actor",
+    "attribute.repository" = "assertion.repository",
+  }
 }
 
 resource "google_service_account_iam_binding" "github_actions_sa" {
@@ -46,8 +37,14 @@ resource "google_service_account_iam_binding" "github_actions_sa" {
   role = "roles/iam.workloadIdentityUser"
 }
 
+resource "google_service_account" "github_actions_sa" {
+  project = var.project_id
+  account_id = "github-actions"
+  description = "Access from github actions"
+}
+
 resource "google_project_iam_member" "github_actions_sa" {
   project = var.project_id
   role = "roles/firebase.admin"
-  member = google_service_account.github_actions_sa.name
+  member = "serviceAccount:${google_service_account.github_actions_sa.email}"
 }
